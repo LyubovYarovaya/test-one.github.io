@@ -8,20 +8,22 @@ body {
 }
 .product{
     position: relative;
+    background-image: url('../img/illustration.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
     height: 100vh;
-    background: #e3608b;
 
     &::before {
-        //content: "";
+        content: "";
         position: absolute;
         left: 0;
         bottom: 0;
-        background-image: url('../img/illustration.svg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        width: 100vw;
         height: 100vh;
+        background: #e3608b;
+        width: 100%;
+        z-index: -1;
     }
 }
 
@@ -62,8 +64,12 @@ body {
     text-align: center;
     width: 302px;
     height: 465px;
+    margin-right: 30px;
     background: linear-gradient(to bottom, rgba(0,0,0,0) 45%,rgba(0,0,0,0) 47%,rgba(0,0,0,0.102) 100%);
-    box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.102);
+
+    &:last-child {
+        margin-right: 0;
+    }
 
     &_title {
         font-size: 36px;
@@ -106,7 +112,19 @@ body {
         display: flex;
         justify-content: center;
         .quantity {
-
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            .cost {
+                width: 100%;
+                justify-content: center;
+            }
+            .count {
+                flex: 1;
+            }
+            .buy {
+                flex: 1;
+            }
         }
 
         .buy {
@@ -127,6 +145,14 @@ body {
         }
     }
 }
+.cost {
+    display: flex;
+}
+
+.not_spesial {
+    text-decoration: line-through;
+}
+
 select {
     background: transparent;
     outline: none;
@@ -138,6 +164,91 @@ select {
 
 option {
     background: transparent;
+}
+
+$background: rgba(0,0,0,0.102);
+$select-color: #fff;
+$select-background: rgba(0,0,0,0.102);
+$select-width: 80px;
+$select-height: 40px; 
+
+
+.select-hidden {
+    display: none;
+    visibility: hidden;
+    padding-right: 10px;
+}
+.select {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    color: $select-color;
+    width: $select-width;
+    height: $select-height;
+}
+.select-styled {
+    position: absolute; 
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $select-background;
+    padding: 8px 15px;
+    &:after {
+        content:"";
+        width: 0;
+        height: 0;
+        border: 7px solid transparent;
+        border-color: $select-color transparent transparent transparent;
+        position: absolute;
+        top: 16px;
+        right: 10px;
+    }
+    &:hover {
+        background-color: darken($select-background, 2);
+    }
+    &:active, &.active {
+        background-color: darken($select-background, 5);
+        &:after {
+            top: 9px;
+            border-color: transparent transparent $select-color transparent;
+        }
+    }
+}
+
+.select-options {
+    display: none; 
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: darken($select-background, 5);
+    height: 128px;
+    overflow: auto;
+    li {
+        margin: 0;
+        padding: 12px 0;
+        text-indent: 15px;
+        border-top: 1px solid darken($select-background, 10);
+        &:hover {
+            color: $select-background;
+            background: $select-color;
+        }
+        &[rel="hide"] {
+            display: none;
+        }
+    }
+}
+.mCSB_inside>.mCSB_container {
+    margin-right: 0px; 
+}
+.mCSB_scrollTools {
+    width: 9px;
 }
 
 
